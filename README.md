@@ -29,10 +29,10 @@ object Constant {
 
 ## ScreenShot
 - Splash Screen
-  <img src="art/splash_screen.jpg)" width="200" style="max-width:100%;">
-  <img src="art/sample_report_screen.jpg)" width="200" style="max-width:100%;">
-  <img src="art/sample_clock_screen.jpg)" width="200" style="max-width:100%;">
-  <img src="art/sample_clock_screen1.jpg)" width="200" style="max-width:100%;">
+  <img src="art/splash_screen.jpg" width="200" style="max-width:100%;">
+  <img src="art/sample_report_screen.jpg" width="200" style="max-width:100%;">
+  <img src="art/sample_clock_screen.jpg" width="200" style="max-width:100%;">
+  <img src="art/sample_clock_screen1.jpg" width="200" style="max-width:100%;">
 - ![Report Screen](art/sample_report_screen.jpg)
 - ![Clock Screen](art/sample_clock_screen.jpg)
 - ![Clock Screen 1](art/sample_clock_screen1.jpg)
