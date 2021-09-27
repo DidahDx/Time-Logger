@@ -28,14 +28,11 @@ object Constant {
 - [Demo Video of App running](https://drive.google.com/file/d/1XkVZvd5QQ0C6-rxQxd-PwbjF8rrwUoFQ/view?usp=sharing)
 
 ## ScreenShot
-- Splash Screen
   <img src="art/splash_screen.jpg" width="200" style="max-width:100%;">
   <img src="art/sample_report_screen.jpg" width="200" style="max-width:100%;">
   <img src="art/sample_clock_screen.jpg" width="200" style="max-width:100%;">
   <img src="art/sample_clock_screen1.jpg" width="200" style="max-width:100%;">
-- ![Report Screen](art/sample_report_screen.jpg)
-- ![Clock Screen](art/sample_clock_screen.jpg)
-- ![Clock Screen 1](art/sample_clock_screen1.jpg)
+
 
 ## Testing
 - All tests are under the Android Test package. All the tests are run using JUnit.
