@@ -28,10 +28,8 @@ object Constant {
 - [Demo Video of App running](https://drive.google.com/file/d/1XkVZvd5QQ0C6-rxQxd-PwbjF8rrwUoFQ/view?usp=sharing)
 
 ## ScreenShot
-  <img src="art/splash_screen.jpg" width="200" style="max-width:100%;">
-  <img src="art/sample_report_screen.jpg" width="200" style="max-width:100%;">
-  <img src="art/sample_clock_screen.jpg" width="200" style="max-width:100%;">
-  <img src="art/sample_clock_screen1.jpg" width="200" style="max-width:100%;">
+  <img src="art/splash_screen.jpg" width="200" style="max-width:100%;"> <img src="art/sample_clock_screen.jpg" width="200" style="max-width:100%;">
+  <img src="art/sample_clock_screen1.jpg" width="200" style="max-width:100%;"> <img src="art/sample_report_screen.jpg" width="200" style="max-width:100%;">
 
 
 ## Testing
