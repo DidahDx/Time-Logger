@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         clock = binding.clock
         mainActivityViewModel =
             ViewModelProvider(this, viewModel).get(MainActivityViewModel::class.java)
-        mainActivityViewModel.state.observe(this, Observer { it ->
+        mainActivityViewModel.state.observe(this, { it ->
             when (it) {
                 is Resource.Success -> {
                     binding.displayMessage.text = it.data?.displayMessage ?: ""
@@ -100,84 +100,100 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        mainActivityViewModel.clockTimeInterval
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(150)
-            .map { v -> v + 1 }
-            .autoDispose(scope())
-            .subscribe({ clockTick ->
-                mainActivityViewModel.second = (clockTick % 60).toInt()
-                mainActivityViewModel.minute = (clockTick / (60)).toInt()
-                val numberFormat: NumberFormat = NumberFormat.getInstance(Locale.ENGLISH)
-                numberFormat.minimumIntegerDigits = 2
-                clock.setTime(
-                    mainActivityViewModel.hour,
-                    numberFormat.format(mainActivityViewModel.minute).toInt(),
-                    numberFormat.format(mainActivityViewModel.second).toInt()
+        mainActivityViewModel.timer.observe(this, { miliseconds ->
+            val clockTick = miliseconds / 1000
+            val millisec =miliseconds % 1000
+            mainActivityViewModel.second = (clockTick % 60).toInt()
+            mainActivityViewModel.minute = (clockTick / (60)).toInt()
+            val numberFormat: NumberFormat = NumberFormat.getInstance(Locale.ENGLISH)
+            numberFormat.minimumIntegerDigits = 2
+            clock.setTime(
+                mainActivityViewModel.hour,
+                numberFormat.format(mainActivityViewModel.minute).toInt(),
+                numberFormat.format(mainActivityViewModel.second).toInt(),
+                millisec.toInt()
+            )
+            val random: Int = rand.nextInt(4)
+            if (miliseconds.toInt() % 30000 == 0) {
+                mainActivityViewModel.startServer(
+                    ProgramDto(
+                        "${mainActivityViewModel.hour}:${mainActivityViewModel.minute}:${mainActivityViewModel.second}",
+                        hourHandColor[random],
+                        wallColor[random],
+                        clockFaceColor[random]
+                    )
                 )
-                val random: Int = rand.nextInt(4)
-                if (clockTick.toInt() % 30 == 0) {
-                    mainActivityViewModel.startServer(
-                        ProgramDto(
-                            "${mainActivityViewModel.hour}:${mainActivityViewModel.minute}:${mainActivityViewModel.second}",
-                            hourHandColor[random],
-                            wallColor[random],
-                            clockFaceColor[random]
-                        )
+            }
+
+            if (miliseconds.toInt() % 40000 == 0) {
+                mainActivityViewModel.stopServer(
+                    ProgramDto(
+                        "${mainActivityViewModel.hour}:${mainActivityViewModel.minute}:${mainActivityViewModel.second}",
+                        hourHandColor[random],
+                        wallColor[random],
+                        clockFaceColor[random]
                     )
-                }
+                )
+            }
 
-                if (clockTick.toInt() % 40 == 0) {
-                    mainActivityViewModel.stopServer(
-                        ProgramDto(
-                            "${mainActivityViewModel.hour}:${mainActivityViewModel.minute}:${mainActivityViewModel.second}",
-                            hourHandColor[random],
-                            wallColor[random],
-                            clockFaceColor[random]
-                        )
+            if (miliseconds.toInt() % 50000 == 0) {
+                mainActivityViewModel.getReport(
+                    ProgramDto(
+                        "${mainActivityViewModel.hour}:${mainActivityViewModel.minute}:${mainActivityViewModel.second}",
+                        hourHandColor[random],
+                        wallColor[random],
+                        clockFaceColor[random]
                     )
-                }
+                )
+            }
 
-                if (clockTick.toInt() % 50 == 0) {
-                    mainActivityViewModel.getReport(
-                        ProgramDto(
-                            "${mainActivityViewModel.hour}:${mainActivityViewModel.minute}:${mainActivityViewModel.second}",
-                            hourHandColor[random],
-                            wallColor[random],
-                            clockFaceColor[random]
-                        )
-                    )
-                }
-
-            }, Timber::e)
+        })
 
 
-        clock.setFaceDrawable(ContextCompat.getDrawable(this,R.drawable.ic_clock_face_green))
+        clock.setFaceDrawable(ContextCompat.getDrawable(this, R.drawable.ic_clock_face_green))
         binding.report.setOnClickListener {
             startActivity(Intent(this, ReportActivity::class.java))
         }
 
-        clock.setTime(mainActivityViewModel.hour, mainActivityViewModel.minute, mainActivityViewModel.second)
+        clock.setTime(
+            mainActivityViewModel.hour,
+            mainActivityViewModel.minute,
+            mainActivityViewModel.second
+        )
 
     }
 
     private fun setWallColor(color: String) {
         when (color) {
             WallColorEnum.Tangerine.name -> {
-                binding.constraint.setBackgroundColor(ContextCompat.getColor(this,R.color.tangerine))
+                binding.constraint.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.tangerine
+                    )
+                )
             }
             WallColorEnum.Indigo.name -> {
-                binding.constraint.setBackgroundColor(ContextCompat.getColor(this,R.color.indigo))
+                binding.constraint.setBackgroundColor(ContextCompat.getColor(this, R.color.indigo))
             }
             WallColorEnum.Rufous.name -> {
-                binding.constraint.setBackgroundColor(ContextCompat.getColor(this,R.color.rufous))
+                binding.constraint.setBackgroundColor(ContextCompat.getColor(this, R.color.rufous))
             }
             WallColorEnum.TealGreen.name -> {
-                binding.constraint.setBackgroundColor(ContextCompat.getColor(this,R.color.teal_green))
+                binding.constraint.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.teal_green
+                    )
+                )
             }
             WallColorEnum.DeepPink.name -> {
-                binding.constraint.setBackgroundColor(ContextCompat.getColor(this,R.color.deep_pink))
+                binding.constraint.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.deep_pink
+                    )
+                )
             }
         }
     }
@@ -207,34 +223,40 @@ class MainActivity : AppCompatActivity() {
         when (clockFaceColor) {
             ClockFaceColorEnum.PURPLE.name -> {
                 binding.clock.setFaceDrawable(
-                    ContextCompat.getDrawable(this,
+                    ContextCompat.getDrawable(
+                        this,
                         R.drawable.ic_clock_face_purple
                     )
                 )
             }
             ClockFaceColorEnum.YELLOW.name -> {
                 binding.clock.setFaceDrawable(
-                    ContextCompat.getDrawable(this,
-                        R.drawable.ic_clock_face_yellow)
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.ic_clock_face_yellow
+                    )
                 )
             }
             ClockFaceColorEnum.RED.name -> {
                 binding.clock.setFaceDrawable(
-                    ContextCompat.getDrawable(this,
+                    ContextCompat.getDrawable(
+                        this,
                         R.drawable.ic_clock_face_red
                     )
                 )
             }
             ClockFaceColorEnum.GREEN.name -> {
                 binding.clock.setFaceDrawable(
-                    ContextCompat.getDrawable(this,
+                    ContextCompat.getDrawable(
+                        this,
                         R.drawable.ic_clock_face_green
                     )
                 )
             }
             ClockFaceColorEnum.BLUE.name -> {
                 binding.clock.setFaceDrawable(
-                    ContextCompat.getDrawable(this,
+                    ContextCompat.getDrawable(
+                        this,
                         R.drawable.ic_clock_face_blue
                     )
                 )
