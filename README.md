@@ -33,7 +33,6 @@ object Constant {
 - Build the project and run it.
 
 ## Sample Video
-<video src="https://user-images.githubusercontent.com/40716139/139555638-32c15fe2-03c7-42d9-8377-d95c11c32ea1.mp4" >
 
 
 ## ScreenShots
