@@ -33,7 +33,8 @@ object Constant {
 - Build the project and run it.
 
 ## Sample Video
-- [Demo Video of App running](https://drive.google.com/file/d/1XkVZvd5QQ0C6-rxQxd-PwbjF8rrwUoFQ/view?usp=sharing)
+<video src="https://user-images.githubusercontent.com/40716139/139555638-32c15fe2-03c7-42d9-8377-d95c11c32ea1.mp4" >
+
 
 ## ScreenShots
   <img src="art/splash_screen.jpg" width="200" style="max-width:100%;"> <img src="art/sample_clock_screen.jpg" width="200" style="max-width:100%;">
