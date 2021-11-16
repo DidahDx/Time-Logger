@@ -1,5 +1,5 @@
 # Timer Logger
-This is a take away assignment innovex
+
 
 ## Table of Contents
 - [Prerequisite](#prerequisite)
