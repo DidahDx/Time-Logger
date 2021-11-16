@@ -32,9 +32,6 @@ object Constant {
 ```
 - Build the project and run it.
 
-## Sample Video
-
-
 ## ScreenShots
   <img src="art/splash_screen.jpg" width="200" style="max-width:100%;"> <img src="art/sample_clock_screen.jpg" width="200" style="max-width:100%;">
   <img src="art/sample_clock_screen1.jpg" width="200" style="max-width:100%;"> <img src="art/sample_report_screen.jpg" width="200" style="max-width:100%;">
